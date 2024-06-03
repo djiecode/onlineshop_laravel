@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Product; // Add this import statement
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -51,6 +51,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = \App\Models\Product::findOrFail($id);
+
         //if image is not empty, then update the image
         if ($request->image) {
             $filename = time() . '.' . $request->image->extension();

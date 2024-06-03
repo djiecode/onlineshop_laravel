@@ -64,7 +64,6 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>

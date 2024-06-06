@@ -35,11 +35,11 @@ class CallbackController extends Controller
         ]);
         // }
 
-        // return response()->json([
-        //     'meta' => [
-        //         'code' => 400,
-        //         'message' => 'Callback failed',
-        //     ],
-        // ]);
+        return response()->json([
+            'meta' => [
+                'code' => 400,
+                'message' => 'Callback failed',
+            ],
+        ]);
     }
 }

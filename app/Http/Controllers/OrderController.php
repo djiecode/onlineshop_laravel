@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
 
 class OrderController extends Controller
 {
@@ -40,7 +44,28 @@ class OrderController extends Controller
             'shipping_resi' => $request->shipping_resi,
         ]);
 
+        // send notification to user
+        if ($request->status == 'on_delivery') {
+            $this->sendNotificationToUser($order->first()->user_id, 'Paket Dikirim dengan nomor resi ' . $request->shipping_resi);
+        }
         //redirect to index
         return redirect()->route('order.index');
+    }
+
+    // sendNotification To user
+    public function sendNotificationToUser($userId, $message)
+    {
+        // Dapatkan FCM token user dari table 'users
+        $user = User::find($userId);
+        $token = $user->fcm_id;
+
+        // kirim notifikasi ke perangkat andorid
+        $messaging = app('firebase.messaging');
+        $notification = Notification::create('Paket Dikirim', $message);
+
+        $message = CloudMessage::withTarget('token', $token)
+            ->withNotification($notification);
+
+        $messaging->send($message);
     }
 }

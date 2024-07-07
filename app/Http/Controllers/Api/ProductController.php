@@ -23,6 +23,15 @@ class ProductController extends Controller
         ], 200);
     }
 
+    // get detail product by id
+    public function show($id)
+    {
+        $product = Product::find($id);
+        return response()->json([
+            'message' => 'Success',
+            'data' => $product
+        ], 200);
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -34,10 +43,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    // public function show(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.

@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = \App\Models\Category::all();
-        return view('pages.product.create', compact('categories'));
+        $features = \App\Models\Feature::all();
+        return view('pages.product.create', compact('categories','features'));
     }
 
     //store
@@ -32,7 +33,9 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = (int) $request->price;
         $product->stock = (int) $request->stock;
+        $product->description = $request->description;
         $product->category_id = $request->category_id;
+        $product->feature_id = $request->feature_id;
         $product->image = $filename;
         $product->save();
 
@@ -44,7 +47,9 @@ class ProductController extends Controller
     {
         $product = \App\Models\Product::findOrFail($id);
         $categories = \App\Models\Category::all();
-        return view('pages.product.edit', compact('product', 'categories'));
+        $features = \App\Models\feature::all();
+
+        return view('pages.product.edit', compact('product', 'categories', 'features'));
     }
 
     //update

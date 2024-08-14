@@ -16,11 +16,15 @@ class AuthController extends Controller
             'name' => 'required|max:100',
             'email' => 'required|unique:users|max:100',
             'password' => 'required',
-            'phone' => 'required',
-            'roles' => 'required',
+            'phone' => 'nullable',
+            'roles' => 'nullable',
         ]);
 
-        //password encryption
+        // Set default values
+        $validated['phone'] = $validated['phone'] ?? '';
+        $validated['roles'] = $validated['roles'] ?? 'USER';
+
+        // Password encryption
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
@@ -32,6 +36,30 @@ class AuthController extends Controller
             'user' => $user,
         ], 201);
     }
+
+    // public function register(Request $request)
+    // {
+    //     // Validate the request...
+    //     $validated = $request->validate([
+    //         'name' => 'required|max:100',
+    //         'email' => 'required|unique:users|max:100',
+    //         'password' => 'required',
+    //         'phone' => 'required',
+    //         'roles' => 'required',
+    //     ]);
+
+    //     //password encryption
+    //     $validated['password'] = Hash::make($validated['password']);
+
+    //     $user = User::create($validated);
+
+    //     $token = $user->createToken('auth_token')->plainTextToken;
+
+    //     return response()->json([
+    //         'access_token' => $token,
+    //         'user' => $user,
+    //     ], 201);
+    // }
 
     // logout
     public function logout(Request $request)

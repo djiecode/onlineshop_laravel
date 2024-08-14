@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'stock'=>fake()->randomNumber(2),
             // random range 1-4
             'category_id'=>fake()->numberBetween(1,4),
+            'feature_id'=>fake()->numberBetween(1,4),
         ];
     }
 }

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Promo>
  */
-class CategoryFactory extends Factory
+class PromoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            // generator
-            'name'=> fake()->name(),
-            'image'=>fake()->imageUrl(),
+            //
         ];
     }
 }

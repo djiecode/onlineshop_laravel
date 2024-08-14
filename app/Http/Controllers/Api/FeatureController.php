@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Feature;
 use App\Models\Product; // Add this line
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class FeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //get all categories
-        $categories = Category::all();
+        $categories = Feature::all();
         return response()->json([
             'message' => 'Success',
             'data' => $categories
@@ -30,11 +30,11 @@ class CategoryController extends Controller
         //
     }
 
-    // get all products by category id
-    public function showByCategory($id)
+    // get all products by Feature Id
+    public function showByFeature($id)
     {
         //get product by category id
-        $products = Product::where('category_id', $id)->get();
+        $products = Product::where('feature_id', $id)->get();
         return response()->json([
             'message' => 'Success',
             'data' => $products

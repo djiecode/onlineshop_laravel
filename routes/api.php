@@ -55,3 +55,13 @@ Route::get('/order/{id}', [App\Http\Controllers\Api\OrderController::class, 'get
 
 // get detail product by id
 Route::get('/product/{id}', [App\Http\Controllers\Api\ProductController::class, 'show']);
+
+// get all products by category id
+Route::get('/category/{id}', [App\Http\Controllers\Api\CategoryController::class, 'showByCategory']);
+Route::get('/feature/{id}', [App\Http\Controllers\Api\CategoryController::class, 'showByCategory']);
+
+// search prdouct by name
+Route::get('/search', [App\Http\Controllers\Api\ProductController::class, 'search']);
+
+// get all products by Feature Id
+Route::get('/feature/{id}', [App\Http\Controllers\Api\FeatureController::class, 'showByFeature']);

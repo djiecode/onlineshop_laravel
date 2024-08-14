@@ -75,7 +75,19 @@
                                     </div>
                                 @enderror
                             </div>
-
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <input type="text"
+                                    class="form-control @error('description')
+                                is-invalid
+                            @enderror"
+                                    name="description">
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">Category</label>
                                 <select class="form-control selectric @error('category_id') is-invalid @enderror"
@@ -88,6 +100,19 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">Feature</label>
+                                <select class="form-control selectric @error('$feature_id') is-invalid @enderror"
+                                    name="feature_id">
+                                    <option value="">-- Select Feature --</option>
+                                    @foreach ($features as $feature)
+                                        <option value="{{ $feature->id }}"
+                                            {{ old('feature_id') == $feature->id ? 'selected' : '' }}>
+                                            {{ $feature->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
 
                             <div class="form-group">
                                 <label>Photo Product</label>

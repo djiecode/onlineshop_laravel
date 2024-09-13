@@ -24,5 +24,13 @@ class UserSeeder extends Seeder
             'phone' => '08979636864',
             'roles' => 'ADMIN',
         ]);
+
+        $user = \App\Models\User::factory()->create([
+            'name' => 'abid',
+            'email' => 'abid@gmail.com',
+            'password' => Hash::make('0192'),
+            'phone' => '08979636864',
+            'roles' => 'USER',
+        ]);
     }
 }

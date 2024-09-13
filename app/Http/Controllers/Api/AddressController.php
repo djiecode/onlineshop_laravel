@@ -13,7 +13,7 @@ class AddressController extends Controller
      */
     public function index(Request $request)
     {
-        //all address by user
+        // All addresses by user
         $addresses = DB::table('addresses')->where('user_id', $request->user()->id)->get();
         return response()->json([
             'status' => 'success',
@@ -26,7 +26,7 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //save address
+        // Save address
         $address = DB::table('addresses')->insert([
             'name' => $request->name,
             'full_address' => $request->full_address,
@@ -42,12 +42,12 @@ class AddressController extends Controller
         if ($address) {
             return response()->json([
                 'status' => 'success',
-                'message' => 'address saved'
+                'message' => 'Address saved'
             ], 201);
         } else {
             return response()->json([
                 'status' => 'error',
-                'message' => 'address failed to save'
+                'message' => 'Address failed to save'
             ], 400);
         }
     }
@@ -57,7 +57,20 @@ class AddressController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Get a single address by its ID
+        $address = DB::table('addresses')->where('id', $id)->first();
+
+        if ($address) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $address
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Address not found'
+            ], 404);
+        }
     }
 
     /**
@@ -65,7 +78,29 @@ class AddressController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Update address
+        $updated = DB::table('addresses')->where('id', $id)->update([
+            'name' => $request->name,
+            'full_address' => $request->full_address,
+            'phone' => $request->phone,
+            'prov_id' => $request->prov_id,
+            'city_id' => $request->city_id,
+            'district_id' => $request->district_id,
+            'postal_code' => $request->postal_code,
+            'is_default' => $request->is_default,
+        ]);
+
+        if ($updated) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Address updated successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update address'
+            ], 400);
+        }
     }
 
     /**
@@ -73,6 +108,19 @@ class AddressController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Delete address
+        $deleted = DB::table('addresses')->where('id', $id)->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Address deleted successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete address'
+            ], 400);
+        }
     }
 }

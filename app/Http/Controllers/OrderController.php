@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -68,4 +68,6 @@ class OrderController extends Controller
 
         $messaging->send($message);
     }
+
+
 }
